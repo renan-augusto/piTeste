@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+  <title>Sistema de presença de estágio</title>
+</head>
+<nav class="container-fluid">
+  <ul>
+    <li>
+      <a href="./" class="contrast" onclick="event.preventDefault()"><strong>Sistema de presença de estágio</strong></a>
+    </li>
+  </ul>
+  <ul>
+    <li>
+      <details role="list" dir="rtl">
+        <summary aria-haspopup="listbox" role="link" class="secondary">Tema</summary>
+        <ul role="listbox">
+          <li><a href="#" data-theme-switcher="auto">Auto</a></li>
+          <li><a href="#" data-theme-switcher="light">Claro</a></li>
+          <li><a href="#" data-theme-switcher="dark">Escuro</a></li>
+        </ul>
+      </details>
+    </li>
+</nav>
+<main class="container">
+  <article class="grid">
+    <div>
+      <hgroup>
+        <h1>Entrar</h1>
+        <h2>Bem vindo ao controlador de presenças</h2>
+      </hgroup>
+      <form method="POST" action=" ">
+        <input type="hidden" name="advance" value="{{ advance or url_for('create') }}">
+        <input type="text" name="email" placeholder="E-mail" aria-label="Login" autocomplete="nickname" required />
+        <input type="password" name="password" placeholder="Senha" aria-label="Password" autocomplete="current-password" required />
+
+        <button type="submit" class="contrast" onclick="event.preventDefault()">Login</button>
+      </form>
+    </div>
+  </article>
+</main>
+
+<script type="text/javascript" src=" {{ url_for('static', filename='minimal-theme-switcher.js') }}"></script>
+</body>
+
+</html>

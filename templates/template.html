@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+    <title>Sistema de presença de estágio</title>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><strong>SPE - Sistema de presença de estágio</strong></li>
+        </ul>
+    </nav>
+    {% block content %} {% endblock %}
+
+    <script type="text/javascript" src=" {{ url_for('static', filename=minimal-theme-switcher.js) }}"></script>
+</body>
+
+</html>

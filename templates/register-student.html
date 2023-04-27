@@ -1,0 +1,29 @@
+{% extends "template.html" %}
+{% block content %}
+
+<form class="studentForm" action="{{ url_for('create') }}" method="post" enctype="multipart/form-data">
+    <fieldset>
+        {{ form.csrf_token() }}
+        <div class="form-group inputBox">
+            {{ form.name.label }}
+            {{ form.name }}
+        </div>
+
+        <div class="form-group inputBox">
+            {{ form.email.label }}
+            {{ form.email }}
+        </div>
+
+        <div class="form.group inputBox">
+            {{ form.ra.label }}
+            {{ form.ra }}
+        </div>
+
+        <div class="form-group buttons">
+            {{ form.save(class="btn btn-primary") }}
+        </div>
+
+
+    </fieldset>
+</form>
+{% endblock %}
