@@ -30,7 +30,7 @@ TABLES['users'] = ('''
       `email` varchar(100) UNIQUE NOT NULL,
       `user_type` varchar(10) NOT NULL,
       `password` varchar(100) NOT NULL,
-      PRIMARY KEY (`ID`)
+      PRIMARY KEY (`user_id`)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
 
 for table_name in TABLES:
@@ -46,7 +46,7 @@ for table_name in TABLES:
     else:
         print('OK')
 
-users_sql = 'INSERT INTO users (NOME, EMAIL, TIPO, SENHA) VALUES (%s, %s, %s, %s)'
+users_sql = 'INSERT INTO users (name, email, user_type, password) VALUES (%s, %s, %s, %s)'
 users = [
     ("Renan Augusto", "renan@teste.com.br", "admin", generate_password_hash("teste").decode('utf-8')),
     ("Usuario Teste", "teste@teste.com.br", "admin", generate_password_hash("teste").decode('utf-8'))

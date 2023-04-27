@@ -32,11 +32,16 @@
         <h1>Entrar</h1>
         <h2>Bem vindo ao controlador de presenças</h2>
       </hgroup>
-      <form method="POST" action=" ">
+      <form method="POST" action="{{ advance or url_for('create') }} ">
         <input type="hidden" name="advance" value="{{ advance or url_for('create') }}">
-        <input type="text" name="email" placeholder="E-mail" aria-label="Login" autocomplete="nickname" required />
-        <input type="password" name="password" placeholder="Senha" aria-label="Password" autocomplete="current-password" required />
-
+        <div class="form-group">
+          {{ form.email.label(class="form-control-label") }}
+          {{ form.email(class="form-control form-control-lg", placeholder="E-mail", autocomplete="nickname")}}
+        </div>
+        <div class="form-group">
+          {{ form.password.label(class="form-control=labl") }}
+          {{ form.password(class="form-control form-control-lg", placeholder="Senha", autocomplete="current-password") }}
+        </div>
         <button type="submit" class="contrast" onclick="event.preventDefault()">Login</button>
       </form>
     </div>
