@@ -13,7 +13,7 @@ def index():
 @app.route('/auth', methods=['POST', ])
 def auth():
     form = UserForm(request.form)
-    user = Users.query.filter_by(email = form.email.data).first()
+    user = users.query.filter_by(email = form.email.data).first()
     password = check_password_hash(user.password, form.password.data)
     if user and password:
         session['loggedUser'] = user.email
@@ -22,6 +22,13 @@ def auth():
         return redirect(advance_page)
     else:
         flash('Usuário ou senha incorretos - Não Logado')
+
+@app.route('/logout')
+def logout():
+    session['loggedUser'] = None
+    flash('Usuário foi desconectado!')
+    return redirect(url_for('index'))
+
 
 @app.route('/create-student')
 def create():
