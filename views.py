@@ -30,7 +30,7 @@ def logout():
     return redirect(url_for('index'))
 
 
-@app.route('/create-student', methods=['POST',  ])
+@app.route('/create-student', methods=['POST', 'GET',  ])
 def create():
     form = StudentForm()
     return render_template('register-student.html', form=form)
