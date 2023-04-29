@@ -35,6 +35,7 @@
 
       <form method="POST" action="{{ advance or url_for('create') }} ">
         <input type="hidden" name="advance" value="{{ advance or url_for('create') }}">
+        {{ form.csrf_token() }}
         <div class="form-group">
           {{ form.email.label(class="form-control-label") }}
           {{ form.email(class="form-control form-control-lg", placeholder="E-mail", autocomplete="nickname")}}
@@ -43,7 +44,9 @@
           {{ form.password.label(class="form-control=labl") }}
           {{ form.password(class="form-control form-control-lg", placeholder="Senha", autocomplete="current-password") }}
         </div>
-        <button type="submit" class="contrast" onclick="event.preventDefault()">Login</button>
+        <div class="form-group buttons">
+          {{ form.login(class="contrast") }}
+        </div>
       </form>
     </div>
   </article>

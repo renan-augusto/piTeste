@@ -33,6 +33,13 @@ TABLES['users'] = ('''
       PRIMARY KEY (`user_id`)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
 
+TABLES['students'] = ('''
+      CREATE TABLE `students` (
+      `student_id` int(11) NOT NULL AUTO_INCREMENT,
+      `student_academic_id` varchar(30) NOT NULL,
+      PRIMARY KEY (`student_id`)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
+
 for table_name in TABLES:
     table_sql = TABLES[table_name]
     try:
@@ -48,8 +55,8 @@ for table_name in TABLES:
 
 users_sql = 'INSERT INTO users (name, email, user_type, password) VALUES (%s, %s, %s, %s)'
 users = [
-    ("Renan Augusto", "renan@teste.com.br", "admin", generate_password_hash("teste").decode('utf-8')),
-    ("Usuario Teste", "teste@teste.com.br", "admin", generate_password_hash("teste").decode('utf-8'))
+    ("Renan Augusto", "renan@teste.com.br", "admin", generate_password_hash("projetointegrador").decode('utf-8')),
+    ("Usuario Teste", "teste@teste.com.br", "admin", generate_password_hash("projetointegrador").decode('utf-8'))
 ]
 cursor.executemany(users_sql, users)
 cursor.execute('select * from REGISTRO_ALUNOS_FAMERP.users')

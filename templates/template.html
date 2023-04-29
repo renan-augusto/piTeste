@@ -5,11 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
     <title>Sistema de presença de estágio</title>
 </head>
 
 <body>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul id="messages" class="list-unstyled">
+        {% for message in messages %}
+        <li class="alert alert-success">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
     <nav>
         <ul>
             <li><strong>SPE - Sistema de presença de estágio</strong></li>
@@ -17,7 +25,7 @@
     </nav>
     {% block content %} {% endblock %}
 
-    <script type="text/javascript" src=" {{ url_for('static', filename=minimal-theme-switcher.js) }}"></script>
+    <script type="text/javascript" src=" {{ url_for('static', filename='minimal-theme-switcher.js') }}"></script>
 </body>
 
 </html>
