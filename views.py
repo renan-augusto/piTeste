@@ -1,8 +1,8 @@
 from spe import app
 from flask import render_template, url_for, request, session, flash, redirect
-from helpers import UserForm
+from helpers import UserForm, StudentForm
 from flask_bcrypt import check_password_hash
-from models import users
+from models import users, students
 
 @app.route('/')
 def index():
@@ -30,7 +30,8 @@ def logout():
     return redirect(url_for('index'))
 
 
-@app.route('/create-student')
+@app.route('/create-student', methods=['POST',  ])
 def create():
-    return render_template('register-student.html')
+    form = StudentForm()
+    return render_template('register-student.html', form=form)
     

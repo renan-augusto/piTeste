@@ -5,11 +5,12 @@ from wtforms import StringField, SubmitField, PasswordField, validators
 
 class UserForm(FlaskForm):
     email = StringField('Email', [validators.DataRequired(), validators.Length(min=3, max=100)] )
-    password = PasswordField('Password', [validators.DataRequired(), validators.Length(min=6, max=100)])
-    save = SubmitField('Save')
+    password = PasswordField('Password', [validators.DataRequired(), validators.Length(min=8, max=100)])
+    login = SubmitField('Login')
 
 class StudentForm(FlaskForm):
-    name = StringField('Nome do estudante', [validators.DataRequired(), validators.Length(min=3, max=100)])
-    email = StringField('Email', [validators.DataRequired(), validators.Length(min=3, max=100)])
-    ra = StringField('Email', [validators.DataRequired(), validators.Length(min=1, max=10)])
+    studentName = StringField('Nome do estudante', [validators.DataRequired(), validators.Length(min=3, max=100)])
+    studentEmail = StringField('Email', [validators.DataRequired(), validators.Length(min=3, max=100)])
+    ra = StringField('RA', [validators.DataRequired(), validators.Length(min=1, max=10)])
+    save = SubmitField('Salvar')
     
