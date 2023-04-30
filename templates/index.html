@@ -33,7 +33,7 @@
         <h2>Bem vindo ao controlador de presenças</h2>
       </hgroup>
 
-      <form method="POST" action="{{ advance or url_for('create') }} ">
+      <form method="POST" action="{{ advance or url_for('auth') }} ">
         <input type="hidden" name="advance" value="{{ advance or url_for('create') }}">
         {{ form.csrf_token() }}
         <div class="form-group">

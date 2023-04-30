@@ -9,6 +9,27 @@
 </head>
 
 <body>
+    <nav>
+        <ul>
+            <li><strong>Sistema de presença de estágio</strong></li>
+        </ul>
+        <ul>
+            <li><a href="{{ url_for('create') }}">Cadastrar aluno</a></li>
+            <li><a href="#">Cadastrar presença</a></li>
+            <li><a href="{{ url_for('logout') }}" role="button">Logout</a></li>
+        </ul>
+        <li>
+            <details role="list" dir="rtl">
+                <summary aria-haspopup="listbox" role="link" class="secondary">Tema</summary>
+                <ul role="listbox">
+                    <li><a href="#" data-theme-switcher="auto">Auto</a></li>
+                    <li><a href="#" data-theme-switcher="light">Claro</a></li>
+                    <li><a href="#" data-theme-switcher="dark">Escuro</a></li>
+                </ul>
+            </details>
+        </li>
+    </nav>
+
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     <ul id="messages" class="list-unstyled">
@@ -18,11 +39,7 @@
     </ul>
     {% endif %}
     {% endwith %}
-    <nav>
-        <ul>
-            <li><strong>SPE - Sistema de presença de estágio</strong></li>
-        </ul>
-    </nav>
+
     {% block content %} {% endblock %}
 
     <script type="text/javascript" src=" {{ url_for('static', filename='minimal-theme-switcher.js') }}"></script>

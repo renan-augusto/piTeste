@@ -22,6 +22,7 @@ def auth():
         return redirect(advance_page)
     else:
         flash('Usuário ou senha incorretos - Não Logado')
+        return redirect(url_for('index'))
 
 @app.route('/logout')
 def logout():
@@ -30,8 +31,10 @@ def logout():
     return redirect(url_for('index'))
 
 
-@app.route('/create-student', methods=['POST',  ])
+@app.route('/create-student', methods=['POST', 'GET',  ])
 def create():
+    if 'loggedUser' not in session or session['loggedUser'] == None:
+        return redirect(url_for('index', advance=url_for('create')))
     form = StudentForm()
     return render_template('register-student.html', form=form)
     
