@@ -36,6 +36,8 @@ TABLES['users'] = ('''
 TABLES['students'] = ('''
       CREATE TABLE `students` (
       `student_id` int(11) NOT NULL AUTO_INCREMENT,
+      `student_name` varchar(100) NOT NULL,
+      `student_email` varchar(100) UNIQUE NOT NULL,
       `student_academic_id` varchar(30) NOT NULL,
       PRIMARY KEY (`student_id`)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
@@ -63,6 +65,17 @@ cursor.execute('select * from REGISTRO_ALUNOS_FAMERP.users')
 print(' -------------  Usuários:  -------------')
 for user in cursor.fetchall():
     print(user[1])
+
+students_sql = 'INSERT INTO students (student_name, student_email, student_academic_id) VALUES(%s, %s, %s)'
+students = [
+    ("Edson Arantes do Nascimento", "edson.arantes@gmail.com", "PELE10"),
+    ("Ronaldo Luiz Nazario de Lima", "ronaldo.nazario@gmail.com", "R9")
+]
+cursor.executemany(students_sql, students)
+cursor.execute('select * from REGISTRO_ALUNOS_FAMERP.students')
+print(' -------------  Estudantes:  -------------')
+for student in cursor.fetchall():
+    print(student[1])
 
 conn.commit()
 
