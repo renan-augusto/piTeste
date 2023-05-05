@@ -9,8 +9,8 @@ class UserForm(FlaskForm):
     login = SubmitField('Login')
 
 class StudentForm(FlaskForm):
-    studentName = StringField('Nome do estudante', [validators.DataRequired(), validators.Length(min=3, max=100)])
-    studentEmail = StringField('Email', [validators.DataRequired(), validators.Length(min=3, max=100)])
-    ra = StringField('RA', [validators.DataRequired(), validators.Length(min=1, max=10)])
+    student_name = StringField('Nome do estudante', [validators.DataRequired(), validators.Length(min=3, max=100)])
+    student_email = StringField('Email', [validators.DataRequired(), validators.Length(min=3, max=100)])
+    student_academic_id = StringField('RA', [validators.DataRequired(), validators.Length(min=1, max=10)])
     save = SubmitField('Salvar')
     
