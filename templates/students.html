@@ -1,0 +1,22 @@
+{% extends "template.html" %}
+{% block content %}
+<div>
+    <table>
+        <thead>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Registro acadêmico</th>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ students.student_name }}</td>
+                <td>{{ students.student_email }}</td>
+                <td>{{ students.student_academic_id }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

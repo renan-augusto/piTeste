@@ -37,4 +37,10 @@ def create():
         return redirect(url_for('index', advance=url_for('create')))
     form = StudentForm()
     return render_template('register-student.html', form=form)
+
+@app.route('/students-table')
+def students():
+    if 'loggedUser' not in session or session['loggedUser'] == None:
+        return redirect(url_for('index', advance=url_for('students')))
+    return render_template('students.html')
     
