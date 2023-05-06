@@ -1,46 +1,40 @@
-from spe import app
+from spe import app, db
 from flask import render_template, url_for, request, session, flash, redirect
-from helpers import UserForm, StudentForm
-from flask_bcrypt import check_password_hash
-from models import users, students
-
-@app.route('/')
-def index():
-    form = UserForm()
-    return render_template('index.html', form=form)
-
-
-@app.route('/auth', methods=['POST', ])
-def auth():
-    form = UserForm(request.form)
-    user = users.query.filter_by(email = form.email.data).first()
-    password = check_password_hash(user.password, form.password.data)
-    if user and password:
-        session['loggedUser'] = user.email
-        flash(user.email + ' logado!')
-        advance_page = request.form['advance']
-        return redirect(advance_page)
-    else:
-        flash('Usuário ou senha incorretos - Não Logado')
-        return redirect(url_for('index'))
-
-@app.route('/logout')
-def logout():
-    session['loggedUser'] = None
-    flash('Usuário foi desconectado!')
-    return redirect(url_for('index'))
-
-
-@app.route('/create-student', methods=['POST', 'GET',  ])
-def create():
-    if 'loggedUser' not in session or session['loggedUser'] == None:
-        return redirect(url_for('index', advance=url_for('create')))
-    form = StudentForm()
-    return render_template('register-student.html', form=form)
+from helpers import StudentForm
+from models import Students
 
 @app.route('/students-table')
 def students():
     if 'loggedUser' not in session or session['loggedUser'] == None:
         return redirect(url_for('index', advance=url_for('students')))
-    return render_template('students.html')
+    students_list = Students.query.order_by(Students.student_name)
+    return render_template('students.html', students=students_list)
     
+@app.route('/registration')
+def registration():
+    if 'loggedUser' not in session or session['loggedUser'] == None:
+        return redirect(url_for('index', advance=url_for('create')))
+    form = StudentForm()
+    return render_template('register-student.html', form=form)
+    
+@app.route('/create-student', methods=['POST',  ])
+def create():
+    form = StudentForm(request.form)
+    if not form.validate_on_submit():
+        return redirect(url_for('create'))
+    
+    student_name = form.student_name.data
+    student_email = form.student_email.data
+    student_academic_id = form.student_academic_id.data
+    
+    student = Students.query.filter_by(student_name=student_name).first()
+    
+    if student:
+        flash('Aluno já cadastrado no sistema')
+        return redirect(url_for('registration'))
+    
+    new_student = Students(student_name=student_name, student_email=student_email, student_academic_id=student_academic_id)
+    db.session.add(new_student)
+    db.session.commit()
+    
+    return redirect(url_for('students'))

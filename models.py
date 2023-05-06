@@ -11,12 +11,12 @@ class users(db.Model):
     def __repr__(self):
         return '<Name %r>' % self.name
     
-class students(db.Model):
+class Students(db.Model):
     __tablename__= "students"
     student_name = db.Column(db.String(100), nullable = False)
     student_email = db.Column(db.String(100), nullable = False, unique = True)
-    student_id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     student_academic_id = db.Column(db.String(30), nullable = False)
+    student_id = db.Column(db.Integer, primary_key = True, autoincrement = True)
 
     def __repr__(self):
         return '<name %r>' % self.name
