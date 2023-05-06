@@ -3,16 +3,18 @@
 <div>
     <table>
         <thead>
-            <th>Nome</th>
-            <th>E-mail</th>
-            <th>Registro acadêmico</th>
+            <tr>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Registro acadêmico</th>
+            </tr>
         </thead>
         <tbody>
             {% for student in students %}
             <tr>
-                <td>{{ students.student_name }}</td>
-                <td>{{ students.student_email }}</td>
-                <td>{{ students.student_academic_id }}</td>
+                <td>{{ student.student_name }}</td>
+                <td>{{ student.student_email }}</td>
+                <td>{{ student.student_academic_id }}</td>
             </tr>
             {% endfor %}
         </tbody>
