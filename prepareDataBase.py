@@ -39,6 +39,7 @@ TABLES['students'] = ('''
       `student_name` varchar(100) NOT NULL,
       `student_email` varchar(100) UNIQUE NOT NULL,
       `student_academic_id` varchar(30) NOT NULL,
+      `student_discipline` varchar(30) NOT NULL, 
       PRIMARY KEY (`student_id`)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
 
@@ -66,10 +67,10 @@ print(' -------------  Usuários:  -------------')
 for user in cursor.fetchall():
     print(user[1])
 
-students_sql = 'INSERT INTO students (student_name, student_email, student_academic_id) VALUES(%s, %s, %s)'
+students_sql = 'INSERT INTO students (student_name, student_email, student_academic_id, student_discipline) VALUES(%s, %s, %s, %s)'
 students = [
-    ("Edson Arantes do Nascimento", "edson.arantes@gmail.com", "PELE10"),
-    ("Ronaldo Luiz Nazario de Lima", "ronaldo.nazario@gmail.com", "R9")
+    ("Edson Arantes do Nascimento", "edson.arantes@gmail.com", "PELE10", "Psicologia"),
+    ("Ronaldo Luiz Nazario de Lima", "ronaldo.nazario@gmail.com", "R9", "Enfermagem")
 ]
 cursor.executemany(students_sql, students)
 cursor.execute('select * from REGISTRO_ALUNOS_FAMERP.students')
