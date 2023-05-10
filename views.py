@@ -1,14 +1,14 @@
 from spe import app, db
 from flask import render_template, url_for, request, session, flash, redirect
 from helpers import StudentForm
-from models import Students
+from models import Students, Internships
 
 @app.route('/attendance')
 def attendance():
     if 'loggedUser' not in session or session['loggedUser'] == None:
         return redirect(url_for('index', advance=url_for('attendance')))
-    
-    return render_template('attendance.html')
+    internships_list = Internships.query.order_by(Internships.internshipsName)
+    return render_template('attendance.html', internships=internships_list)
 
 @app.route('/students-table')
 def students():
