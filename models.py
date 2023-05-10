@@ -21,3 +21,12 @@ class Students(db.Model):
 
     def __repr__(self):
         return '<name %r>' % self.name
+    
+class Internships(db.Model):
+    __tablename__ = "internships"
+    internshipsName = db.Column(db.String(100), nullable = False, unique = True)
+    internshipsId = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    
+    def __repr__(self):
+        return '<name %r>' % self.name
+    
