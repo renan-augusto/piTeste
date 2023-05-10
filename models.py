@@ -21,6 +21,7 @@ class Students(db.Model):
 
     def __repr__(self):
         return '<name %r>' % self.name
+<<<<<<< Updated upstream
     
 class Internships(db.Model):
     __tablename__ = "internships"
@@ -30,3 +31,9 @@ class Internships(db.Model):
     def __repr__(self):
         return '<name %r>' % self.name
     
+=======
+
+class Internship(db.model):
+    __tablename__ = "internship"
+    internshipname = db.Column(db.String(30), nullable = False)
+>>>>>>> Stashed changes

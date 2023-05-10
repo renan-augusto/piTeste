@@ -19,8 +19,8 @@ except mysql.connector.Error as err:
 cursor = conn.cursor()
 
 cursor.execute("DROP DATABASE IF EXISTS `REGISTRO_ALUNOS_FAMERP`;")
-cursor.execute("CREATE DATABASE `REGISTRO_ALUNOS_FAMERP`")
-cursor.execute("USE `REGISTRO_ALUNOS_FAMERP`")
+cursor.execute("CREATE DATABASE `REGISTRO_ALUNOS_FAMERP`;")
+cursor.execute("USE `REGISTRO_ALUNOS_FAMERP`;")
 
 TABLES = {}
 TABLES['users'] = ('''
@@ -43,6 +43,7 @@ TABLES['students'] = ('''
       PRIMARY KEY (`student_id`)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
 
+<<<<<<< Updated upstream
 TABLES['internships'] = ('''
       CREATE TABLE `internships` (
       `internshipsId` int(11) NOT NULL AUTO_INCREMENT,
@@ -50,6 +51,30 @@ TABLES['internships'] = ('''
       PRIMARY KEY (`internshipsId`)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
 
+=======
+TABLES['internship'] = ('''
+      CREATE TABLE `internship` (
+      `internshipid` int(11) NOT NULL AUTO_INCREMENT,
+      PRIMARY KEY (`internshipid`),
+      `internshipname` VARCHAR (30) NOT NULL
+      )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
+
+# INSERT INTO INTERNSHIP (internshipname) VALUES (%s);
+
+TABLES['attendance'] = ('''
+      CREATE TABLE `attendance` (
+      `attendanceid` int(11) NOT NULL AUTO_INCREMENT,
+      PRIMARY KEY (`attendance`),
+      `student_id` INT NOT NULL,
+      FOREIGN KEY (`student_id`) REFERENCES `students`(`studentid`) ON DELETE NO ACTION
+      `internship_id` INT NOT NULL,
+      FOREIGN KEY (`internship_id`) REFERENCES `internship`(`internshipid`) ON DELETE NO ACTION
+
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
+
+#
+
+>>>>>>> Stashed changes
 for table_name in TABLES:
     table_sql = TABLES[table_name]
     try:
