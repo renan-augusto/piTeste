@@ -15,7 +15,7 @@
         </ul>
         <ul>
             <li><a href="{{ url_for('registration') }}">Cadastrar aluno</a></li>
-            <li><a href="#">Cadastrar presença</a></li>
+            <li><a href="{{ url_for('attendance') }}">Cadastrar presença</a></li>
             <li><a href="{{ url_for('students') }}">Alunos cadastrados</a></li>
             <li><a href="{{ url_for('logout') }}" role="button" class="contrast outline">Logout</a></li>
         </ul>
@@ -44,6 +44,7 @@
     {% block content %} {% endblock %}
 
     <script type="text/javascript" src=" {{ url_for('static', filename='minimal-theme-switcher.js') }}"></script>
+    <script type="text/java" src="{{ url_for('static', filename='modal.js') }}"></script>
 </body>
 
 </html>
