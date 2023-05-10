@@ -1,5 +1,14 @@
 {% extends "template.html" %}
 {% block content %}
-<input type="search" id="search" name="search" placeholder="Buscar" />
+<main class="container">
+    <input type="search" id="search" name="search" placeholder="Buscar" />
+
+    {% for internship in internships %}
+    <button class="contrast" data-target="modal-example" onClick="toggleModal(event)">
+        {{ internship.internshipsName }}
+    </button>
+    {% endfor %}
+
+</main>
 
 {% endblock %}
