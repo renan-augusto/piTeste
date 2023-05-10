@@ -1,0 +1,18 @@
+{% extends "template.html" %}
+{% block content %}
+<main class="container">
+    <input type="search" id="search" name="search" placeholder="Buscar" />
+
+    {% for internship in internships %}
+    <details>
+        <summary role="button" class="contrast"> {{ internship.internshipsName }} </summary>
+        <ul>
+            <li>…</li>
+            <li>…</li>
+        </ul>
+    </details>
+    {% endfor %}
+
+</main>
+
+{% endblock %}
