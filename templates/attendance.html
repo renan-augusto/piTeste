@@ -4,9 +4,13 @@
     <input type="search" id="search" name="search" placeholder="Buscar" />
 
     {% for internship in internships %}
-    <button class="contrast" data-target="modal-example" onClick="toggleModal(event)">
-        {{ internship.internshipsName }}
-    </button>
+    <details>
+        <summary role="button" class="contrast">{{ internship.internshipsName }}</summary>
+        <ul>
+            <li>…</li>
+            <li>…</li>
+        </ul>
+    </details>
     {% endfor %}
 
 </main>
