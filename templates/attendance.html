@@ -13,12 +13,22 @@
         <article>
             <a href="#close" aria-label="Close" class="close" data-target="modal-example" onClick="toggleModal(event)">
             </a>
-            <h3>Confirm your action!</h3>
-            <p>
-                Cras sit amet maximus risus.
-                Pellentesque sodales odio sit amet augue finibus pellentesque.
-                Nullam finibus risus non semper euismod.
-            </p>
+            <h3>Marcar presença.</h3>
+            <label for="date">Date
+                <input type="date" id="date" name="date">
+            </label>
+            <fieldset>
+                <label for="checkbox-1">
+                    <input type="checkbox" id="checkbox-1" name="checkbox-1" checked />
+                    Aluno 1
+                </label>
+            </fieldset>
+            <fieldset>
+                <label for="checkbox-1">
+                    <input type="checkbox" id="checkbox-1" name="checkbox-1" checked />
+                    Aluno 2
+                </label>
+            </fieldset>
             <footer>
                 <a href="#cancel" role="button" class="secondary" data-target="modal-example" onClick="toggleModal(event)">
                     Cancel
