@@ -1,6 +1,6 @@
 from spe import db
 
-class users(db.Model):
+class Users(db.Model):
     __tablename__ = "users"
     user_id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     name = db.Column(db.String(100), nullable = False)
@@ -29,4 +29,16 @@ class Internships(db.Model):
     
     def __repr__(self):
         return '<name %r>' % self.name
+<<<<<<< Updated upstream
     
+=======
+
+class Attendance(db.Model):
+    __tablename__ = "attendance"
+    attendance_student_id = db.Column(db.Integer, ForeignKey(students.students_id, nullable = False))
+    attendance_internships_id = db.Column(db.Integer, ForeignKey(internships.internshipsId, nullable = False))
+    attendanceID = db.Column(db.Integer, primary_key = True, autoincrement = True)
+
+    def __repr__(self):
+        return '<name %r>' % self.name
+>>>>>>> Stashed changes

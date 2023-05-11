@@ -50,6 +50,25 @@ TABLES['internships'] = ('''
       PRIMARY KEY (`internshipsId`)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
 
+<<<<<<< Updated upstream
+=======
+# INSERT INTO INTERNSHIP (internshipname) VALUES (%s);
+
+TABLES['attendance'] = ('''
+      CREATE TABLE `attendance` (
+      `attendanceId` int(11) NOT NULL AUTO_INCREMENT,
+      PRIMARY KEY (`attendance`),
+      `attendance_student_id` INT NOT NULL,
+      FOREIGN KEY (`student_id`) REFERENCES `students`(`student_id`) ON DELETE NO ACTION
+      `attendance_internship_id` INT NOT NULL,
+      FOREIGN KEY (`internship_id`) REFERENCES `internship`(`internshipid`) ON DELETE NO ACTION
+
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
+
+#
+
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 for table_name in TABLES:
     table_sql = TABLES[table_name]
     try:
