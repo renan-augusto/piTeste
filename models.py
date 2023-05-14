@@ -20,25 +20,22 @@ class Students(db.Model):
     student_id = db.Column(db.Integer, primary_key = True, autoincrement = True)
 
     def __repr__(self):
-        return '<name %r>' % self.name
-    
+        return '<name %r>' % self.student_name
+
 class Internships(db.Model):
     __tablename__ = "internships"
     internshipsName = db.Column(db.String(100), nullable = False, unique = True)
     internshipsId = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    
+
     def __repr__(self):
-        return '<name %r>' % self.name
-<<<<<<< Updated upstream
-    
-=======
+        return '<name %r>' % self.internshipsName
 
 class Attendance(db.Model):
     __tablename__ = "attendance"
-    attendance_student_id = db.Column(db.Integer, ForeignKey(students.students_id, nullable = False))
-    attendance_internships_id = db.Column(db.Integer, ForeignKey(internships.internshipsId, nullable = False))
+    attendance_student_id = db.Column(db.Integer, db.ForeignKey("students.student_id", nullable = False))
+    attendance_internships_id = db.Column(db.Integer, db.ForeignKey("internships.internshipsId", nullable = False))
     attendanceID = db.Column(db.Integer, primary_key = True, autoincrement = True)
 
     def __repr__(self):
-        return '<name %r>' % self.name
->>>>>>> Stashed changes
+        return f"<Attendance id={self.attendanceID}>"
+

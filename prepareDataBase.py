@@ -50,8 +50,6 @@ TABLES['internships'] = ('''
       PRIMARY KEY (`internshipsId`)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
 
-<<<<<<< Updated upstream
-=======
 # INSERT INTO INTERNSHIP (internshipname) VALUES (%s);
 
 TABLES['attendance'] = ('''
@@ -65,10 +63,6 @@ TABLES['attendance'] = ('''
 
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
 
-#
-
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 for table_name in TABLES:
     table_sql = TABLES[table_name]
     try:
