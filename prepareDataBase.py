@@ -8,10 +8,10 @@ try:
     conn = mysql.connector.connect (
         host='127.0.0.1',
         user='root',
-        password='admin'
+        password='1048'
     )
 except mysql.connector.Error as err:
-    if err.erno == errorcode.ER_ACCESS_DENIED_ERROR:
+    if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
         print('Existe algo errado no nome de usuario ou senha')
     else:
         print(err)
@@ -50,18 +50,45 @@ TABLES['internships'] = ('''
       PRIMARY KEY (`internshipsId`)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
 
+# INSERT INTO INTERNSHIP (internshipname) VALUES (%s);
+
+TABLES['attendance'] = ('''
+      CREATE TABLE `attendance` (
+      `attendanceId` int(11) NOT NULL AUTO_INCREMENT,
+      PRIMARY KEY (`attendance`),
+      `attendance_student_id` INT NOT NULL,
+      FOREIGN KEY (`attendance_student_id`) REFERENCES `students`(`student_id`) ON DELETE NO ACTION
+      `attendance_internship_id` INT NOT NULL,
+      FOREIGN KEY (`attendance_internship_id`) REFERENCES `internship`(`internshipsId`) ON DELETE NO ACTION
+
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
+
 for table_name in TABLES:
     table_sql = TABLES[table_name]
     try:
         print('Generating table {}:'.format(table_name), end=' ')
         cursor.execute(table_sql)
     except mysql.connector.Error as err:
-        if err.errno == errorcode.ER_ABLE_EXISTS_ERROR:
+        if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
             print('Already exists')
         else:
             print(err.msg)
     else:
         print('OK')
+
+""" 
+
+internships_sql =  'INSERT INTO internships (internshipsName) VALUES (%s)'
+internships = [
+    ("Clínica Médica")
+    ("Cirurgia")
+    ("Ginecologia e Obstetrícia")
+    ("Pediatria")
+    ("UPA/SAMU")
+    ("Saúde Coletiva")
+]
+
+"""
 
 users_sql = 'INSERT INTO users (name, email, user_type, password) VALUES (%s, %s, %s, %s)'
 users = [

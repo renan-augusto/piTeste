@@ -2,3 +2,4 @@ __pycache__/
 venv/
 Teste/
 config.py
+.idea/workspace.xml
