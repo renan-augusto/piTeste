@@ -3,3 +3,9 @@ venv/
 Teste/
 config.py
 .idea/workspace.xml
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/piTeste.iml
+.idea/vcs.xml
