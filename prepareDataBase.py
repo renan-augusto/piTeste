@@ -55,11 +55,11 @@ TABLES['internships'] = ('''
 TABLES['attendance'] = ('''
       CREATE TABLE `attendance` (
       `attendanceId` int(11) NOT NULL AUTO_INCREMENT,
-      PRIMARY KEY (`attendance`),
       `attendance_student_id` INT NOT NULL,
-      FOREIGN KEY (`attendance_student_id`) REFERENCES `students`(`student_id`) ON DELETE NO ACTION
+      FOREIGN KEY (`attendance_student_id`) REFERENCES `students`(`student_id`) ON DELETE NO ACTION,
       `attendance_internship_id` INT NOT NULL,
-      FOREIGN KEY (`attendance_internship_id`) REFERENCES `internship`(`internshipsId`) ON DELETE NO ACTION
+      FOREIGN KEY (`attendance_internship_id`) REFERENCES `internships`(`internshipsId`) ON DELETE NO ACTION,
+      PRIMARY KEY (`attendanceId`)
 
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
 

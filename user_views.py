@@ -2,7 +2,7 @@ from spe import app
 from flask import render_template, url_for, request, session, flash, redirect
 from helpers import UserForm
 from flask_bcrypt import check_password_hash
-from models import Users
+from models import users
 
 @app.route('/')
 def index():

@@ -1,6 +1,6 @@
 from spe import db
 
-class Users(db.Model):
+class users(db.Model):
     __tablename__ = "users"
     user_id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     name = db.Column(db.String(100), nullable = False)
