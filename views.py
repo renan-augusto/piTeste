@@ -14,7 +14,7 @@ def attendance():
 def students():
     if 'loggedUser' not in session or session['loggedUser'] == None:
         return redirect(url_for('index', advance=url_for('students')))
-    students_list = Students.query.order_by(Students.student_name)
+    students_list = Students.query.order_by(Students.studentName)
     return render_template('students.html', students=students_list)
     
 @app.route('/registration')
@@ -30,18 +30,18 @@ def create():
     if not form.validate_on_submit():
         return redirect(url_for('create'))
 
-    student_name = form.student_name.data
-    student_email = form.student_email.data
-    student_academic_id = form.student_academic_id.data
-    student_discipline = form.student_discipline.data
+    studentName = form.studentName.data
+    studentEmail = form.studentEmail.data
+    studentAcademicId = form.studentAcademicId.data
+    studentDiscipline = form.studentDiscipline.data
 
-    student = Students.query.filter_by(student_name=student_name).first()
+    student = Students.query.filter_by(studentName=studentName).first()
 
     if student:
         flash('Aluno já cadastrado no sistema')
         return redirect(url_for('registration'))
 
-    new_student = Students(student_name=student_name, student_email=student_email, student_academic_id=student_academic_id, student_discipline=student_discipline)
+    new_student = Students(studentName=studentName, studentEmail=studentEmail, studentAcademicId=studentAcademicId, studentDiscipline=studentDiscipline)
     db.session.add(new_student)
     db.session.commit()
 
