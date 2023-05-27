@@ -13,10 +13,10 @@
         <tbody>
             {% for student in students %}
             <tr>
-                <td>{{ student.student_name }}</td>
-                <td>{{ student.student_email }}</td>
-                <td>{{ student.student_academic_id }}</td>
-                <td>{{ student.student_discipline }}</td>
+                <td>{{ student.studentName }}</td>
+                <td>{{ student.studentEmail }}</td>
+                <td>{{ student.studentAcademicId }}</td>
+                <td>{{ student.internships.internshipsName }}</td>
             </tr>
             {% endfor %}
         </tbody>
