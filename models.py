@@ -1,4 +1,5 @@
 from spe import db
+from sqlalchemy.orm import relationship
 
 class users(db.Model):
     __tablename__ = "users"
@@ -13,11 +14,11 @@ class users(db.Model):
 
 class Students(db.Model):
     __tablename__= "students"
-    student_name = db.Column(db.String(100), nullable = False)
-    student_email = db.Column(db.String(100), nullable = False, unique = True)
-    student_academic_id = db.Column(db.String(30), nullable = False)
-    student_discipline = db.Column(db.String(30), nullable = False)
-    student_id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    studentName = db.Column(db.String(100), nullable = False)
+    studentEmail = db.Column(db.String(100), nullable = False, unique = True)
+    studentAcademicId = db.Column(db.String(30), nullable = False)
+    studentId = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    internship_id = db.Column(db.Integer, db.ForeignKey("internships.internshipsId"), nullable = False)
 
     def __repr__(self):
         return '<name %r>' % self.student_name
@@ -26,6 +27,7 @@ class Internships(db.Model):
     __tablename__ = "internships"
     internshipsName = db.Column(db.String(100), nullable = False, unique = True)
     internshipsId = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    students = db.relationship('Students', backref='internships', lazy=True)
 
     def __repr__(self):
         return '<name %r>' % self.internshipsName
@@ -33,7 +35,7 @@ class Internships(db.Model):
 class Attendance(db.Model):
     __tablename__ = "attendance"
     attendance_student_id = db.Column(db.Integer, db.ForeignKey("students.student_id"), nullable = False)
-    attendance_internships_id = db.Column(db.Integer, db.ForeignKey("internships.internshipsId"), nullable = False)
+    attendanceDate = db.Column(db.DateTime, nullable = False)
     attendanceID = db.Column(db.Integer, primary_key = True, autoincrement = True)
 
     def __repr__(self):

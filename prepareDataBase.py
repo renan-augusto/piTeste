@@ -8,7 +8,7 @@ try:
     conn = mysql.connector.connect (
         host='127.0.0.1',
         user='root',
-        password='1048'
+        password='admin'
     )
 except mysql.connector.Error as err:
     if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
@@ -50,8 +50,6 @@ TABLES['internships'] = ('''
       PRIMARY KEY (`internshipsId`)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;''')
 
-# INSERT INTO INTERNSHIP (internshipname) VALUES (%s);
-
 TABLES['attendance'] = ('''
       CREATE TABLE `attendance` (
       `attendanceId` int(11) NOT NULL AUTO_INCREMENT,
@@ -76,20 +74,6 @@ for table_name in TABLES:
     else:
         print('OK')
 
-""" 
-
-internships_sql =  'INSERT INTO internships (internshipsName) VALUES (%s)'
-internships = [
-    ("Clínica Médica")
-    ("Cirurgia")
-    ("Ginecologia e Obstetrícia")
-    ("Pediatria")
-    ("UPA/SAMU")
-    ("Saúde Coletiva")
-]
-
-"""
-
 users_sql = 'INSERT INTO users (name, email, user_type, password) VALUES (%s, %s, %s, %s)'
 users = [
     ("Renan Augusto", "renan@teste.com.br", "admin", generate_password_hash("projetointegrador").decode('utf-8')),
@@ -111,6 +95,23 @@ cursor.execute('select * from REGISTRO_ALUNOS_FAMERP.students')
 print(' -------------  Estudantes:  -------------')
 for student in cursor.fetchall():
     print(student[1])
+
+'''    
+internships_sql =  'INSERT INTO internships (internshipsName) VALUES (%s)'
+internships = [
+    ("Clínica Médica"),
+    ("Cirurgia"),
+    ("Ginecologia e Obstetrícia"),
+    ("Pediatria"),
+    ("UPA/SAMU"),
+    ("Saúde Coletiva")
+]
+cursor.executemany(internships_sql, internships)
+cursor.execute('select * from REGISTRO_ALUNOS_FAMERP.internships')
+print(' -------------  Estagios:  -------------')
+for user in cursor.fetchall():
+    print(internships[1])
+'''
 
 conn.commit()
 

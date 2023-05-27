@@ -14,7 +14,7 @@ def attendance():
 def students():
     if 'loggedUser' not in session or session['loggedUser'] == None:
         return redirect(url_for('index', advance=url_for('students')))
-    students_list = Students.query.order_by(Students.studentName)
+    students_list = Students.query.join(Internships).order_by(Students.studentName)
     return render_template('students.html', students=students_list)
     
 @app.route('/registration')
@@ -22,18 +22,20 @@ def registration():
     if 'loggedUser' not in session or session['loggedUser'] == None:
         return redirect(url_for('index', advance=url_for('create')))
     form = StudentForm()
+    form.internship.choices = [(internship.internshipsId, internship.internshipsName) for internship in Internships.query.all()] 
     return render_template('register-student.html', form=form)
 
-@app.route('/create-student', methods=['POST',  ])
+@app.route('/create-student', methods=['POST', ])
 def create():
-    form = StudentForm(request.form)
+    form = StudentForm(request.form) 
+    form.internship.choices = [(internship.internshipsId, internship.internshipsName) for internship in Internships.query.all()]    
     if not form.validate_on_submit():
         return redirect(url_for('create'))
 
     studentName = form.studentName.data
     studentEmail = form.studentEmail.data
     studentAcademicId = form.studentAcademicId.data
-    studentDiscipline = form.studentDiscipline.data
+    studentInternshipsId = form.internship.data
 
     student = Students.query.filter_by(studentName=studentName).first()
 
@@ -41,7 +43,7 @@ def create():
         flash('Aluno já cadastrado no sistema')
         return redirect(url_for('registration'))
 
-    new_student = Students(studentName=studentName, studentEmail=studentEmail, studentAcademicId=studentAcademicId, studentDiscipline=studentDiscipline)
+    new_student = Students(studentName=studentName, studentEmail=studentEmail, studentAcademicId=studentAcademicId, internship_id=studentInternshipsId)
     db.session.add(new_student)
     db.session.commit()
 
