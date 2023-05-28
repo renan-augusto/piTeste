@@ -1,7 +1,8 @@
 from spe import app, db
 from flask import render_template, url_for, request, session, flash, redirect
-from helpers import StudentForm
-from models import Students, Internships
+from helpers import StudentForm, RegisterAttendanceForm
+from models import Students, Internships, Attendance
+from datetime import datetime
 
 @app.route('/attendance')
 def attendance():
@@ -9,6 +10,39 @@ def attendance():
         return redirect(url_for('index', advance=url_for('attendance')))
     internships_list = Internships.query.order_by(Internships.internshipsName)
     return render_template('attendance.html', internships=internships_list)
+
+@app.route('/attendance/<int:internshipsId>')
+def studentInternship(internshipsId):
+    if 'loggedUser' not in session or session['loggedUser'] == None:
+        return redirect(url_for('index', advance=url_for('attendance')))
+    form = RegisterAttendanceForm()
+    internship = Internships.query.get_or_404(internshipsId)
+    students_list = Students.query.filter_by(internship_id=internshipsId).all()
+    return render_template('filtered-students.html', internship=internship, students=students_list, form=form)
+
+@app.route('/register-attendance', methods=['POST', ])
+def registerAttendance():
+    form = RegisterAttendanceForm()
+    internship_id = form.internship_id.data
+    students = Students.query.filter_by(internship_id=internship_id).all()
+    student_choices = [(student.studentId, student.studentName) for student in students]
+    form.selected_students.choices = student_choices
+    
+    if form.validate_on_submit():
+        current_date = datetime.now()
+        selected_students = form.selected_students.data
+        
+        for student_id in selected_students:
+            attendance = Attendance(attendance_student_id=student_id, attendanceDate=current_date)
+            db.session.add(attendance)
+        
+        db.session.commit()
+        flash('Presenças registradas com sucesso!')
+        return redirect(url_for('attendance', form=form))
+    
+    flash('Não foi possível cadastrar a presença. Por favor, tente novamente mais tarde.')
+    return redirect(url_for('attendance'))
+  
 
 @app.route('/students-table')
 def students():
