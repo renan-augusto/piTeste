@@ -1,10 +1,10 @@
-import mysql.connector
-from mysql.connector import errorcode
-from flask_bcrypt import generate_password_hash
+#import mysql.connector
+#from mysql.connector import errorcode
+#from flask_bcrypt import generate_password_hash
 
 print("Connecting...")
 
-try:
+#try:
     conn = mysql.connector.connect (
         host='127.0.0.1',
         user='root',

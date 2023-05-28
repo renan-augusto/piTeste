@@ -1,0 +1,22 @@
+{% extends "template.html" %}
+{% block content %}
+<main class="container">
+    <h1>Alunos matriculados em {{ internship.internshipsName }}:</h1>
+    <form action="{{ url_for('registerAttendance') }}" method="POST">
+        {{ form.csrf_token() }}
+        <input type="hidden" name="internshipId" value="{{ internship.internshipsId }}">
+        <ul>
+            {% for student in students %}
+            <br>
+            <input type="checkbox" name="selected_students[]" value="{{ student.studentId }}">
+            {{ student.studentName }}
+            <br>
+            {% endfor %}
+        </ul>
+        {{ form.submit(class="secondary") }}
+    </form>
+</main>
+
+
+
+{% endblock %}
