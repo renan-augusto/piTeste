@@ -16,9 +16,11 @@ def studentInternship(internshipsId):
     if 'loggedUser' not in session or session['loggedUser'] == None:
         return redirect(url_for('index', advance=url_for('attendance')))
     form = RegisterAttendanceForm()
-    internship = Internships.query.get_or_404(internshipsId)
     students_list = Students.query.filter_by(internship_id=internshipsId).all()
-    return render_template('filtered-students.html', internship=internship, students=students_list, form=form)
+    student_choices = [(student.studentId, student.studentName) for student in students_list]
+    form.selected_students.choices = student_choices
+    internship = Internships.query.get_or_404(internshipsId)
+    return render_template('filtered-students.html', internship=internship,form=form)
 
 @app.route('/register-attendance', methods=['POST', ])
 def registerAttendance():
@@ -33,8 +35,8 @@ def registerAttendance():
         selected_students = form.selected_students.data
         
         for student_id in selected_students:
-            attendance = Attendance(attendance_student_id=student_id, attendanceDate=current_date)
-            db.session.add(attendance)
+            new_attendance = Attendance(attendance_student_id=student_id, attendanceDate=current_date)
+            db.session.add(new_attendance)
         
         db.session.commit()
         flash('Presenças registradas com sucesso!')
