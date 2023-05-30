@@ -1,10 +1,7 @@
 import os
 from spe import app
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField, validators, SelectField, IntegerField, SelectMultipleField
-from datetime import datetime
-from spe import db
-from models import Attendance
+from wtforms import StringField, SubmitField, PasswordField, validators, SelectField, IntegerField, SelectMultipleField, widgets
 
 class UserForm(FlaskForm):
     email = StringField('Email', [validators.DataRequired(), validators.Length(min=3, max=100)] )
@@ -21,8 +18,12 @@ class StudentForm(FlaskForm):
 class FilterForm(FlaskForm):
     submit = SubmitField('Filtrar')
     
+class MultiCheckboxField(SelectMultipleField):
+    widget = widgets.ListWidget(prefix_label=False)
+    option_widget = widgets.CheckboxInput()
+    
 class RegisterAttendanceForm(FlaskForm):
-    selected_students = SelectMultipleField('Alunos selecionados', coerce=int)
+    selected_students = MultiCheckboxField('Alunos selecionados', coerce=int)
     internship_id = IntegerField('Id do estagio')
     submit = SubmitField('Registrar presença')
 

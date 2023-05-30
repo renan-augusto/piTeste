@@ -1,20 +1,31 @@
 {% extends "template.html" %}
 {% block content %}
 <main class="container">
-    <h1>Alunos matriculados em {{ internship.internshipsName }}:</h1>
-    <form action="{{ url_for('registerAttendance') }}" method="POST">
-        {{ form.csrf_token() }}
-        <input type="hidden" name="internshipId" value="{{ internship.internshipsId }}">
-        <ul>
-            {% for student in students %}
-            <br>
-            <input type="checkbox" name="selected_students[]" value="{{ student.studentId }}">
-            {{ student.studentName }}
-            <br>
-            {% endfor %}
-        </ul>
-        {{ form.submit(class="secondary") }}
-    </form>
+    <article class="grid">
+        <div>
+            <hgroup>
+                <h1>Alunos matriculados em {{ internship.internshipsName }}:</h1>
+                <h2>Selecione os alunos presentes na data atual.</h2>
+            </hgroup>
+            <form action="{{ url_for('registerAttendance') }}" method="POST">
+                <fieldset>
+                    {{ form.csrf_token() }}
+                    <div class="form-group">
+                        <input type="hidden" name="internship_id" value="{{ internship.internshipsId }}">
+                    </div>
+                    {% for choice in form.selected_students %}
+                    <div class="form-group">
+                        {{ choice(class="form-control form-control-lg") }}
+                        {{ choice.label(class="form-control-label") }}
+                    </div>
+                    {% endfor %}
+                </fieldset>
+                <div class="form-group buttons">
+                    {{ form.submit(class="secondary") }}
+                </div>
+            </form>
+        </div>
+    </article>
 </main>
 
 
